@@ -5,12 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.xin.sendjsondemo.MainActivity">
 
     <Button
         android:id="@+id/sendJson_Bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="发送Json数据"/>
 
 </LinearLayout>

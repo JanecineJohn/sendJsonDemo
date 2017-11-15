@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String jsonUser = gson.toJson(testUser);
         MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-        String url = "";//服务器地址
+        String url = "https://www.baidu.com/";//服务器地址
         OkHttpClient client = new OkHttpClient();//创建okhttp实例
         RequestBody body = RequestBody.create(JSON,jsonUser);
         Request request = new Request.Builder()
@@ -63,15 +63,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 //请求失败时调用,若要更新UI界面，需在runOnUIThread方法中
-                Toast.makeText(MainActivity.this,"请求数据失败",
-                        Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this,"请求数据失败",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
                 //请求成功时调用
-                Toast.makeText(MainActivity.this,"请求数据完毕：" + response.body().toString(),
-                        Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this,"请求数据完毕：" + response.body().toString(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
